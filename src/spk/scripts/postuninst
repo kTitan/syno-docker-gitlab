@@ -7,7 +7,7 @@
 /usr/syno/bin/synowebapi --exec api=SYNO.Docker.Container version=1 method=delete name=synology_gitlab_redis force=true preserve_profile=false
 /usr/syno/bin/synowebapi --exec api=SYNO.Docker.Container version=1 method=delete name=synology_gitlab force=true preserve_profile=false
 docker rmi redis:3.0.7
-docker rmi sameersbn/gitlab:8.6.2
+docker rmi sameersbn/gitlab:8.11.5
 
 if [ "$SYNOPKG_PKG_STATUS" != UPGRADE ]; then
 	DB_USER="$PKG_SHORT"

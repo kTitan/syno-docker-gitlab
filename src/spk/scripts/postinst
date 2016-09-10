@@ -6,7 +6,7 @@
 DB_HOST="$DOCKER_HOST"
 DB_USER="$PKG_SHORT"
 API=/usr/syno/bin/synowebapi
-SIZE_GITLAB=268
+SIZE_GITLAB=318
 SIZE_REDIS=65
 
 if [ "$SYNOPKG_PKG_STATUS" != UPGRADE ]; then
@@ -72,7 +72,7 @@ sed -i \
 
 /var/packages/Docker/target/tool/helper \
 	redis 3.0.7 "$TARGET_PATH"/docker/redis-3.0.7.tar.xz $SIZE_REDIS \
-	sameersbn/gitlab 8.6.2 "$TARGET_PATH"/docker/gitlab-8.6.2.tar.xz $SIZE_GITLAB \
+	sameersbn/gitlab 8.11.5 "$TARGET_PATH"/docker/gitlab-8.11.5.tar.xz $SIZE_GITLAB \
 	|| exit 1
 
 $API --exec api=SYNO.Docker.Container version=1 method=create is_run_instantly=false \
