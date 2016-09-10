@@ -2,14 +2,14 @@ language: bash
 
 script:
 - mkdir releases
-- cd src/package && tar cfz ../spk/package.tgz . && cd -
-- cd src/spk && tar cf ../../releases/Docker-Gitlab-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.spk . && cd - && ls releases/
+- cd src/package && tar cfz ../spk/package.tgz * && cd -
+- cd src/spk && tar cf ../../releases/Docker-GitLab-x86-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.spk * && cd - && ls releases/
 
 deploy:
   skip_cleanup: true
   provider: releases
   api_key:
     secure: uralTc6bi0X1jqQsWW5jM3wEajJczOwOTlhXN59PG3xcWicUyKASeTqDZtaugt93BvQfXb7H2mRcRMp7TeBKetRGW1YBHn+/ut1gZUap9EAW21On6CxRjHgRIrKoZ7bXi5PrQ94jO0PZBT/Qsye7rdNWUDo54xz8jDfWkzJN4RE3TBCYgULQj3K9UuzmW+13UERFz2eov6hOwrigw1U5bo7EJi/IKVWbpwYrUdB7gP2KTYr5x16/Mw/qpDbJlK03NvAFAEVr8dWfkDUbz8tN9FQSGmM3y0Iuullx0UJk4l1dVy+274KMDQHJpFMl7XPmrqSfpUTDsdYulRis+jlzmRJAY8BvvY11gsPH7TAC2Hne+5JJZh+ybWZDRu549JpwyUGNopZi6lEoVxZQ5EsjiKaE2l0PKClk3GrS2QlYgOH1vqxgHA9dyaEkEE2vT3yrBY9WeKfvcB7QrA4zaeesWl5Bx0zOpCu0WTOUGcfmuyFFVGXTV6EB0eR6BrB4mZXQ1DeFRAr5458M1Dsw/CpfuhIUmO0dQk3Ju20nlNREnyFh4nxkTCRQlXM4mm2ab07NtxHjmQDTRj72vnPhLJoWGOnlZef726HZgXvUueVyJZ4EiH21nA64hN15G3+dV3Ir8hadLS/rFyNQTRMq+MuPNIOIfLxoMzRc81H3+/wh3eo=
-  file: releases/Docker-Gitlab-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.spk
+  file: releases/Docker-GitLab-x86-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.spk
   on:
     tags: true
