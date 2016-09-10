@@ -26,6 +26,8 @@ if [ "$SYNOPKG_PKG_STATUS" != UPGRADE ]; then
 	SMTP_VERIFY="$pkgwizard_smtp_verify"
 	SHARE="$pkgwizard_dataroot"
 	SQL="CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS'; CREATE DATABASE IF NOT EXISTS \`$(echo "$DB_NAME" | quote_sql)\` DEFAULT CHARACTER SET \`utf8\` COLLATE \`utf8_unicode_ci\`; GRANT ALL PRIVILEGES ON \`$(echo "$DB_NAME" | quote_sql)\`.* TO '$DB_USER'@'%';"
+	GITLAB_SECRETS_SECRET_KEY_BASE="$(openssl rand -base64 48 | sed 's,/,_,g')"
+	GITLAB_SECRETS_OTP_KEY_BASE="$(openssl rand -base64 48 | sed 's,/,_,g')"
 
 	echo "$SQL" | mysql -uroot "$MARIADB_PASS"
 
@@ -43,6 +45,8 @@ if [ "$SYNOPKG_PKG_STATUS" != UPGRADE ]; then
 		echo SMTP_PASS="\"$(echo "$SMTP_PASS" | quote_sh)\""
 		echo SMTP_VERIFY="\"$(echo "$SMTP_VERIFY" | quote_sh)\""
 		echo SHARE="\"$(echo "$SHARE" | quote_sh)\""
+		echo GITLAB_SECRETS_SECRET_KEY_BASE="\"$(echo "$GITLAB_SECRETS_SECRET_KEY_BASE" | quote_sh)\""
+		echo GITLAB_SECRETS_OTP_KEY_BASE="\"$(echo "$GITLAB_SECRETS_OTP_KEY_BASE" | quote_sh)\""
 	) > "$ETC_PATH"/config
 else
 	. "$ETC_PATH"/config

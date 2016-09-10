@@ -26,6 +26,11 @@ fi
 [ "$pkgwizard_smtp_verify_unchanged" != true ] && SMTP_VERIFY="$pkgwizard_smtp_verify_true"
 [ -z "$DB_SALT" ] && DB_SALT="$(openssl rand -base64 48 | sed 's,/,_,g')"
 
+# 8.11
+dataPath="$SHARE_PATH/$pkgwizard_dataroot"
+[ -z "$GITLAB_SECRETS_SECRET_KEY_BASE" ] && GITLAB_SECRETS_SECRET_KEY_BASE="$(cat $dataPath/.secret)"
+[ -z "$GITLAB_SECRETS_OTP_KEY_BASE" ] && GITLAB_SECRETS_OTP_KEY_BASE="$(cat $dataPath/.secret)"
+
 (
 	echo HTTP_PORT="\"$(echo $HTTP_PORT | quote_sh)\""
 	echo SSH_PORT="\"$(echo $SSH_PORT | quote_sh)\""
@@ -41,6 +46,8 @@ fi
 	echo SMTP_PASS="\"$(echo $SMTP_PASS | quote_sh)\""
 	echo SMTP_VERIFY="\"$(echo $SMTP_VERIFY | quote_sh)\""
 	echo SHARE="\"$(echo $SHARE | quote_sh)\""
+	echo GITLAB_SECRETS_SECRET_KEY_BASE="\"$(echo $GITLAB_SECRETS_SECRET_KEY_BASE | quote_sh)\""
+	echo GITLAB_SECRETS_OTP_KEY_BASE="\"$(echo $GITLAB_SECRETS_OTP_KEY_BASE | quote_sh)\""
 ) > "$ETC_PATH"/config
 
 exit 0
