@@ -1,0 +1,16 @@
+language: bash
+
+script:
+  - mkdir releases
+  - cd src/package && tar cfz ../spk/package.tgz . && cd -
+  - cd src/spk && tar cf ../../releases/Docker-Gitlab-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.spk .
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: $GH_TOKEN
+  file:
+    - releases/Docker-Gitlab-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.spk
+  on:
+    tags: true
